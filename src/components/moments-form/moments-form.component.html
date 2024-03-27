@@ -1,16 +1,26 @@
-<form action="">
-  <div class="form-group">
+<form (ngSubmit)="submit()" [formGroup]="momentForm" #formDir="ngForm">
+  <div class="form-group mb-0">
     <label for="title">Titulo:</label>
-    <input type="text" placeholder="Coloque um titulo." required>
+    <input type="text" placeholder="Coloque um titulo." formControlName="title" required>
   </div>
+  <div class="validation-error" *ngIf="title.invalid && formDir.submitted">
+    <p>Titulo obrigatório</p>
+  </div>
+
   <div class="form-group">
     <label for="title">Descrição:</label>
-    <textarea class="h-40 border-2 border-cyan-950" placeholder="Descrição..." maxlength="200" required></textarea>
+    <textarea class="h-40 border-2 border-cyan-950" placeholder="Descrição..." maxlength="200" formControlName="description" required></textarea>
+  </div>
+  <div class="validation-error" *ngIf="description.invalid && formDir.submitted">
+    <p>Descrição obrigatória</p>
   </div>
 
   <div class="form-group">
     <label for="image">Carrege seu momento:</label>
-    <input type="file">
+    <input type="file" formControlName="image" (change)="onFileSelected($event)">
   </div>
-  <input class="bg-red-600 text-gray-900 rounded p-2 cursor-pointer" type="submit" value="{{ btnText }}" (click)="send()" />
+  <div class="validation-error" *ngIf="image.invalid && formDir.submitted">
+    <p>Imagem do momento obrigatória</p>
+  </div>
+  <input [disabled]="formDir.invalid" class="bg-green-400 text-gray-900 rounded p-2 cursor-pointer" type="submit" value="{{ btnText }}" />
 </form>

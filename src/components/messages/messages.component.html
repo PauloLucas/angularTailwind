@@ -1,0 +1,9 @@
+<div class="fixed mt-5 w-2/3 ml-52 z-10 bg-white border-2 border-yellow-500 p-2 flex flex-col" *ngIf="messageService.message">
+  <div class="flex justify-between mb-2">
+    <h2>Messagem do Sistema: </h2>
+    <button class="p-1 cursor-pointer" (click)="messageService.clear()">
+        <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+  <p class="text-lg">{{ messageService.message }}</p>
+</div>
